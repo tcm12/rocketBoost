@@ -6,7 +6,12 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     Rigidbody rocket;
-    AudioSource rocketRumble;
+
+    [SerializeField] AudioClip rocketRumble;
+
+    //Modify the audio file to be longer
+    [SerializeField] AudioClip rcsTrhuster;
+    AudioSource audioSource;
 
     private float rotationSpeed;
     [SerializeField] float rcsThrust = 1;
@@ -16,7 +21,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         rocket = GetComponent<Rigidbody>();
-        rocketRumble = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,14 +40,52 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) == true)
         {
-            rocketRumble.Play(0);
+            audioSource.PlayOneShot(rocketRumble);
         }
+
+        if (Input.GetKeyDown(KeyCode.A) == true)
+        {
+            audioSource.PlayOneShot(rcsTrhuster);
+        }
+        else if (Input.GetKeyDown(KeyCode.D) == true)
+             {
+                   audioSource.PlayOneShot(rcsTrhuster);
+             }
 
         if (Input.GetKeyUp(KeyCode.Space) == true)
         {
-            rocketRumble.Stop();
+            audioSource.Stop();
+            if (Input.GetKey(KeyCode.A) == true || Input.GetKey(KeyCode.B) == true)
+            {
+                audioSource.PlayOneShot(rcsTrhuster);
+            }
         }
 
+        if (Input.GetKeyUp(KeyCode.A) == true)
+        {
+            audioSource.Stop();
+            if (Input.GetKey(KeyCode.Space) == true)
+            {
+                audioSource.PlayOneShot(rocketRumble);
+            }
+            if (Input.GetKey(KeyCode.D) == true)
+            {
+                audioSource.PlayOneShot(rcsTrhuster);
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.D) == true)
+        {
+            audioSource.Stop();
+            if (Input.GetKey(KeyCode.Space) == true)
+            {
+                audioSource.PlayOneShot(rocketRumble);
+            }
+            if (Input.GetKey(KeyCode.A) == true)
+            {
+                audioSource.PlayOneShot(rcsTrhuster);
+            }
+        }
     }
 
     private void RocketMovement()
@@ -70,6 +113,5 @@ public class Rocket : MonoBehaviour
         rocket.constraints = RigidbodyConstraints.FreezePositionZ;
         rocket.constraints = RigidbodyConstraints.FreezeRotationX;
         rocket.constraints = RigidbodyConstraints.FreezeRotationY;
-
     }
 }
