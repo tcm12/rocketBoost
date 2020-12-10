@@ -9,7 +9,6 @@ public class Rocket : MonoBehaviour
 
     [SerializeField] AudioClip rocketRumble;
 
-    //Modify the audio file to be longer
     [SerializeField] AudioClip rcsTrhuster;
     AudioSource audioSource;
 
@@ -21,14 +20,12 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem leftThrusterParticles;
     [SerializeField] ParticleSystem rightTrhusterParticles;
 
-    // Start is called before the first frame update
     void Start()
     {
         rocket = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Freeze();
@@ -41,6 +38,22 @@ public class Rocket : MonoBehaviour
         rocket.constraints = RigidbodyConstraints.FreezePositionZ;
         rocket.constraints = RigidbodyConstraints.FreezeRotationX;
         rocket.constraints = RigidbodyConstraints.FreezeRotationY;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                //do nothing
+                break;
+            case "Finish":
+                //win
+                break;
+            default:
+                //destroy rocket
+                break;
+        }
     }
 
     void RocketRumble()
