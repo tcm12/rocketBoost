@@ -31,8 +31,16 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Freeze();
         RocketMovement();
         RocketRumble();
+    }
+
+    void Freeze()
+    {
+        rocket.constraints = RigidbodyConstraints.FreezePositionZ;
+        rocket.constraints = RigidbodyConstraints.FreezeRotationX;
+        rocket.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 
     void RocketRumble()
@@ -102,25 +110,17 @@ public class Rocket : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) == true)
         {
-            rocket.constraints = RigidbodyConstraints.FreezeRotationZ; //stops from rotating endlessly
-
+            rocket.constraints = RigidbodyConstraints.FreezeRotationZ;
+            Freeze();
             rotationSpeed = rcsThrust * Time.deltaTime;
             transform.Rotate(Vector3.forward * rotationSpeed);
-
-            rocket.constraints = RigidbodyConstraints.None; //to unfreeze Z axis
         }
         else if (Input.GetKey(KeyCode.D) == true)
         {
-            rocket.constraints = RigidbodyConstraints.FreezeRotationZ; //stops from rotating endlessly
-
+            rocket.constraints = RigidbodyConstraints.FreezeRotationZ;
+            Freeze();
             rotationSpeed = rcsThrust * Time.deltaTime;
             transform.Rotate(-Vector3.forward * rotationSpeed);
-
-            rocket.constraints = RigidbodyConstraints.None; //to unfreeze Z axis
         }
-
-        rocket.constraints = RigidbodyConstraints.FreezePositionZ;
-        rocket.constraints = RigidbodyConstraints.FreezeRotationX;
-        rocket.constraints = RigidbodyConstraints.FreezeRotationY;
     }
 }
