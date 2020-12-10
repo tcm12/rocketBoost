@@ -8,17 +8,17 @@ public class Rocket : MonoBehaviour
     Rigidbody rocket;
 
     [SerializeField] AudioClip rocketRumble;
-
     [SerializeField] AudioClip rcsTrhuster;
     AudioSource audioSource;
 
-    private float rotationSpeed;
     [SerializeField] float rcsThrust = 1;
     [SerializeField] float mainThrust = 1;
 
     [SerializeField] ParticleSystem mainEngineParticles;
     [SerializeField] ParticleSystem leftThrusterParticles;
-    [SerializeField] ParticleSystem rightTrhusterParticles;
+    [SerializeField] ParticleSystem rightThrusterParticles;
+
+    private bool dead = false;
 
     void Start()
     {
@@ -28,9 +28,16 @@ public class Rocket : MonoBehaviour
 
     void Update()
     {
-        Freeze();
-        RocketMovement();
-        RocketRumble();
+        if (dead)
+        {
+            //implement bombastique death
+        }
+        else
+        {
+            Freeze();
+            RocketMovement();
+            RocketRumble();
+        }
     }
 
     void Freeze()
@@ -48,10 +55,14 @@ public class Rocket : MonoBehaviour
                 //do nothing
                 break;
             case "Finish":
-                //win
+                print("You won!");
                 break;
             default:
-                //destroy rocket
+                dead = true;
+                audioSource.Stop();
+                mainEngineParticles.Stop();
+                leftThrusterParticles.Stop();
+                rightThrusterParticles.Stop();
                 break;
         }
     }
@@ -72,7 +83,7 @@ public class Rocket : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.D) == true)
              {
                    audioSource.PlayOneShot(rcsTrhuster);
-                   rightTrhusterParticles.Play();
+                   rightThrusterParticles.Play();
              }
 
         if (Input.GetKeyUp(KeyCode.Space) == true)
@@ -102,7 +113,7 @@ public class Rocket : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D) == true)
         {
             audioSource.Stop();
-            rightTrhusterParticles.Stop();
+            rightThrusterParticles.Stop();
             if (Input.GetKey(KeyCode.Space) == true)
             {
                 audioSource.PlayOneShot(rocketRumble);
@@ -118,22 +129,20 @@ public class Rocket : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) == true)
         {
-            rocket.AddRelativeForce(Vector3.up * mainThrust);
+            rocket.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A) == true)
         {
             rocket.constraints = RigidbodyConstraints.FreezeRotationZ;
             Freeze();
-            rotationSpeed = rcsThrust * Time.deltaTime;
-            transform.Rotate(Vector3.forward * rotationSpeed);
+            transform.Rotate(Vector3.forward * rcsThrust * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.D) == true)
         {
             rocket.constraints = RigidbodyConstraints.FreezeRotationZ;
             Freeze();
-            rotationSpeed = rcsThrust * Time.deltaTime;
-            transform.Rotate(-Vector3.forward * rotationSpeed);
+            transform.Rotate(-Vector3.forward * rcsThrust * Time.deltaTime);
         }
     }
 }

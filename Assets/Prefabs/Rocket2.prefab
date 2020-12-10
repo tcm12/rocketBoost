@@ -15008,10 +15008,10 @@ MonoBehaviour:
   rocketRumble: {fileID: 8300000, guid: adcd6942b26fc264dad446285aebc1ef, type: 3}
   rcsTrhuster: {fileID: 8300000, guid: 67a615399f25b114887c67df2d3ae328, type: 3}
   rcsThrust: 110
-  mainThrust: 2.2
+  mainThrust: 450
   mainEngineParticles: {fileID: 4316176971318168811}
   leftThrusterParticles: {fileID: 1004992306}
-  rightTrhusterParticles: {fileID: 1670783801}
+  rightThrusterParticles: {fileID: 1670783801}
 --- !u!82 &781464931201543721
 AudioSource:
   m_ObjectHideFlags: 0
