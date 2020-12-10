@@ -128,14 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1681314943, guid: 040979d088d03c1499c45d650dded0f6, type: 3}
-      propertyPath: m_Radius
-      value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 1681314943, guid: 040979d088d03c1499c45d650dded0f6, type: 3}
-      propertyPath: m_Center.y
-      value: 0.355
-      objectReference: {fileID: 0}
     - target: {fileID: 9172149614483840542, guid: 040979d088d03c1499c45d650dded0f6,
         type: 3}
       propertyPath: m_Name
@@ -154,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 9172149614483840543, guid: 040979d088d03c1499c45d650dded0f6,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.38
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 9172149614483840543, guid: 040979d088d03c1499c45d650dded0f6,
         type: 3}
@@ -215,6 +207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaunchPad 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 573819433074305241, guid: f2e43f14284f4a84a8aaba8b0afb472f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8654759431682931937, guid: f2e43f14284f4a84a8aaba8b0afb472f,
         type: 3}
@@ -289,6 +286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaunchPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 573819433074305241, guid: f2e43f14284f4a84a8aaba8b0afb472f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8654759431682931937, guid: f2e43f14284f4a84a8aaba8b0afb472f,
         type: 3}
@@ -496,6 +498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 350326087744727000, guid: ebc23f0274a1c0841b767e6369b8eec3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8921431784760094970, guid: ebc23f0274a1c0841b767e6369b8eec3,
         type: 3}

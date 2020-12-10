@@ -17,6 +17,10 @@ public class Rocket : MonoBehaviour
     [SerializeField] float rcsThrust = 1;
     [SerializeField] float mainThrust = 1;
 
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem leftThrusterParticles;
+    [SerializeField] ParticleSystem rightTrhusterParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,29 +37,28 @@ public class Rocket : MonoBehaviour
 
     void RocketRumble()
     {
-        if (Input.GetKey(KeyCode.Space) == true)
-        {
-            rocket.AddRelativeForce(Vector3.up * mainThrust);
-        }
-
         if (Input.GetKeyDown(KeyCode.Space) == true)
         {
             audioSource.PlayOneShot(rocketRumble);
+            mainEngineParticles.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.A) == true)
         {
             audioSource.PlayOneShot(rcsTrhuster);
+            leftThrusterParticles.Play();
         }
         else if (Input.GetKeyDown(KeyCode.D) == true)
              {
                    audioSource.PlayOneShot(rcsTrhuster);
+                   rightTrhusterParticles.Play();
              }
 
         if (Input.GetKeyUp(KeyCode.Space) == true)
         {
             audioSource.Stop();
-            if (Input.GetKey(KeyCode.A) == true || Input.GetKey(KeyCode.B) == true)
+            mainEngineParticles.Stop();
+            if (Input.GetKey(KeyCode.A) == true || Input.GetKey(KeyCode.D) == true)
             {
                 audioSource.PlayOneShot(rcsTrhuster);
             }
@@ -64,6 +67,7 @@ public class Rocket : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A) == true)
         {
             audioSource.Stop();
+            leftThrusterParticles.Stop();
             if (Input.GetKey(KeyCode.Space) == true)
             {
                 audioSource.PlayOneShot(rocketRumble);
@@ -77,6 +81,7 @@ public class Rocket : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D) == true)
         {
             audioSource.Stop();
+            rightTrhusterParticles.Stop();
             if (Input.GetKey(KeyCode.Space) == true)
             {
                 audioSource.PlayOneShot(rocketRumble);
@@ -90,6 +95,10 @@ public class Rocket : MonoBehaviour
 
     private void RocketMovement()
     {
+        if (Input.GetKey(KeyCode.Space) == true)
+        {
+            rocket.AddRelativeForce(Vector3.up * mainThrust);
+        }
 
         if (Input.GetKey(KeyCode.A) == true)
         {
