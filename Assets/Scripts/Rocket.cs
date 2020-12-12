@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
@@ -49,13 +50,21 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (dead)
+        {
+            return;
+        }
+
         switch (collision.gameObject.tag)
         {
             case "Friendly":
                 //do nothing
                 break;
             case "Finish":
-                print("You won!");
+                if (!dead)
+                {
+                    Invoke("loadNextScene", 2f);
+                }
                 break;
             default:
                 dead = true;
@@ -63,8 +72,19 @@ public class Rocket : MonoBehaviour
                 mainEngineParticles.Stop();
                 leftThrusterParticles.Stop();
                 rightThrusterParticles.Stop();
+                Invoke("loadMainMenu", 2f);
                 break;
         }
+    }
+
+    void loadNextScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    void loadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void RocketRumble()
